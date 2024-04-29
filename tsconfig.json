@@ -1,0 +1,3 @@
+{
+	"extends": ["@poolofdeath20/tsconfig/node", "./.nuxt/tsconfig.json"]
+}

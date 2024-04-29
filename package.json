@@ -1,0 +1,26 @@
+{
+	"name": "nuxt-app",
+	"private": true,
+	"type": "module",
+	"scripts": {
+		"postinstall": "prettier-config-generate && nuxt prepare",
+		"format": "prettier-config-generate && prettier .",
+		"format-write": "pnpm format --write",
+		"format-check": "pnpm format --check",
+		"build-production": "nuxt build",
+		"start-development": "nuxt dev",
+		"generate": "nuxt generate",
+		"preview": "nuxt preview"
+	},
+	"dependencies": {
+		"nuxt": "^3.11.2",
+		"primevue": "^3.52.0",
+		"vue": "^3.4.21",
+		"vue-router": "^4.3.0"
+	},
+	"devDependencies": {
+		"@poolofdeath20/prettier-config-generator": "^0.0.1",
+		"@poolofdeath20/tsconfig": "^0.0.0",
+		"nuxt-primevue": "^0.3.1"
+	}
+}
