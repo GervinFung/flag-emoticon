@@ -1,7 +1,8 @@
 {
-	"name": "nuxt-app",
+	"name": "flag-emoticon",
 	"private": true,
 	"type": "module",
+	"license": "GPL-3.0",
 	"scripts": {
 		"postinstall": "prettier-config-generate && nuxt prepare",
 		"format": "prettier-config-generate && prettier .",
@@ -13,7 +14,11 @@
 		"preview": "nuxt preview"
 	},
 	"dependencies": {
+		"@poolofdeath20/util": "^0.8.0",
 		"nuxt": "^3.11.2",
+		"oh-vue-icons": "1.0.0-rc3",
+		"primeflex": "^3.3.1",
+		"primeicons": "^7.0.0",
 		"primevue": "^3.52.0",
 		"vue": "^3.4.21",
 		"vue-router": "^4.3.0"
