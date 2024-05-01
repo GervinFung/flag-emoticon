@@ -4,14 +4,7 @@
 	"type": "module",
 	"license": "GPL-3.0",
 	"scripts": {
-		"postinstall": "prettier-config-generate && nuxt prepare",
-		"format": "prettier-config-generate && prettier .",
-		"format-write": "pnpm format --write",
-		"format-check": "pnpm format --check",
-		"build-production": "nuxt build",
-		"start-development": "nuxt dev",
-		"generate": "nuxt generate",
-		"preview": "nuxt preview"
+		"postinstall": "make postinstall"
 	},
 	"dependencies": {
 		"@poolofdeath20/util": "^0.8.0",
