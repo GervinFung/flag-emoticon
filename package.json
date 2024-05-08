@@ -8,6 +8,7 @@
 	},
 	"dependencies": {
 		"@poolofdeath20/util": "^0.8.0",
+		"@vueuse/core": "^10.9.0",
 		"nuxt": "^3.11.2",
 		"oh-vue-icons": "1.0.0-rc3",
 		"primeflex": "^3.3.1",

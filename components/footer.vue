@@ -3,12 +3,14 @@
 		class="flex flex-column align-items-center justify-content-center gap-5 pt-2 pb-3 mt-7 border-top-1 border-gray-200"
 	>
 		<div class="flex flex-row justify-content-between container py-1 mt-3">
-			<img
-				class="border-round-lg"
-				src="~/assets/world.png"
-				alt="Logo icon"
-				style="width: 48px; height: 48px"
-			/>
+			<NuxtLink to="/">
+				<img
+					class="border-round-lg"
+					src="~/assets/world.png"
+					alt="Logo icon"
+					style="width: 48px; height: 48px"
+				/>
+			</NuxtLink>
 		</div>
 		<div class="flex flex-row justify-content-between container py-1">
 			<div class="flex flex-row align-items-center gap-2">
@@ -40,3 +42,4 @@
 	width: 36px;
 }
 </style>
+<script setup lang="ts"></script>
