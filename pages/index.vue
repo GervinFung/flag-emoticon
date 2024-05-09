@@ -33,45 +33,15 @@ const route = useRoute();
 const router = useRouter();
 
 const pagination = computed(() => {
+	const { page, rows } = route.query;
+
 	return {
-		page: Defined.parse(route.query.page)
-			.map((page) => {
-				if (typeof page === 'string') {
-					return parseInt(page);
-				}
-
-				throw new Error(
-					`Expected string, got page of "${page}" with type '${typeof page}'`
-				);
-			})
-			.orGet(0),
-		rows: Defined.parse(route.query.rows)
-			.map((rows) => {
-				if (typeof rows === 'string') {
-					return parseInt(rows);
-				}
-
-				throw new Error(
-					`Expected string, got rows of "${rows}" with type '${typeof rows}'`
-				);
-			})
-			.orGet(10),
+		page: typeof page !== 'string' ? 0 : parseInt(page),
+		rows: typeof rows !== 'string' ? 10 : parseInt(rows),
 	};
 });
 
-const search = ref(
-	Defined.parse(route.query.search)
-		.map((search) => {
-			if (typeof search === 'string') {
-				return search;
-			}
-
-			throw new Error(
-				`Expected string, got "${search}" with type '${typeof search}'`
-			);
-		})
-		.orGet('')
-);
+const search = useSearch();
 
 const categories = ref(
 	Array.from(
@@ -209,17 +179,7 @@ watch(
 	},
 	(newSearch, oldSearch) => {
 		if (oldSearch !== newSearch) {
-			search.value = Defined.parse(newSearch)
-				.map((search) => {
-					if (typeof search === 'string') {
-						return search;
-					}
-
-					throw new Error(
-						`Expected string, got search of "${search}" with type '${typeof search}'`
-					);
-				})
-				.orGet('');
+			search.value = typeof newSearch !== 'string' ? '' : search;
 		}
 	},
 	{
