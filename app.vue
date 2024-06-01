@@ -2,6 +2,19 @@
 import 'primevue/resources/themes/aura-light-green/theme.css';
 import 'primeflex/primeflex.min.css';
 import 'primeicons/primeicons.css';
+
+const title = 'Flag Emoticon';
+
+const description =
+	'A website that house unicode for multiple flags, including country flag and subdivision flag';
+
+useServerSeoMeta({
+	title,
+	ogTitle: title,
+	description,
+	ogDescription: description,
+	robots: 'index, follow',
+});
 </script>
 
 <template>
