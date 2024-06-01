@@ -20,6 +20,8 @@
 	"devDependencies": {
 		"@poolofdeath20/prettier-config-generator": "^0.0.1",
 		"@poolofdeath20/tsconfig": "^0.0.0",
-		"nuxt-primevue": "^0.3.1"
+		"axios": "^1.7.2",
+		"nuxt-primevue": "^0.3.1",
+		"vitest": "^1.6.0"
 	}
 }
