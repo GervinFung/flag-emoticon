@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, reactive, computed } from 'vue';
+import { ref, computed } from 'vue';
 
 import { useDebounceFn } from '@vueuse/core';
 
@@ -11,7 +11,7 @@ import InputText from 'primevue/inputtext';
 import FloatLabel from 'primevue/floatlabel';
 import Tooltip from 'primevue/tooltip';
 
-import { Defined, capitalize } from '@poolofdeath20/util';
+import { capitalize } from '@poolofdeath20/util';
 
 import unicodes from '~/data/unicodes';
 
@@ -179,7 +179,7 @@ watch(
 	},
 	(newSearch, oldSearch) => {
 		if (oldSearch !== newSearch) {
-			search.value = typeof newSearch !== 'string' ? '' : search;
+			search.value = typeof newSearch !== 'string' ? '' : search.value;
 		}
 	},
 	{
