@@ -1,7 +1,11 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue';
 
-import { useDebounceFn } from '@vueuse/core';
+import {
+	useDebounceFn,
+	useBreakpoints,
+	breakpointsPrimeFlex,
+} from '@vueuse/core';
 
 import DataTable from 'primevue/datatable';
 import Column from 'primevue/column';
@@ -14,6 +18,7 @@ import Tooltip from 'primevue/tooltip';
 import { capitalize } from '@poolofdeath20/util';
 
 import unicodes from '~/data/unicodes';
+import useSearch from '~/composables/use-search';
 
 const props = defineProps<{
 	category: undefined | string;
@@ -31,6 +36,37 @@ const category = ref(
 const route = useRoute();
 
 const router = useRouter();
+
+const breakpoints = useBreakpoints(breakpointsPrimeFlex);
+
+const isSmOrLower = computed(() => {
+	const { value } = breakpoints.active();
+
+	return !value;
+});
+
+const tableMinWidth = computed(() => {
+	const { value } = breakpoints.active();
+
+	switch (value) {
+		case '': {
+			return 10;
+		}
+		case 'sm': {
+			return 20;
+		}
+		case 'md':
+		case 'lg': {
+			return 50;
+		}
+		case 'xl': {
+			return 60;
+		}
+		default: {
+			throw new Error(`Unknown breakpoint of '${value}'`);
+		}
+	}
+});
 
 const pagination = computed(() => {
 	const { page, rows } = route.query;
@@ -214,10 +250,18 @@ const slicedUnicodes = computed(() => {
 			class="gap-6 flex flex-column align-items-center justify-content-center"
 			style="width: fit-content"
 		>
-			<h2 class="font-bold" style="margin: 0">
-				Want to know the Unicode of a flag? Search below!
-			</h2>
-			<div class="flex flex-row gap-5">
+			<div class="gap-2 flex flex-column align-items-center">
+				<h2 class="font-bold" style="margin: 0">
+					Want to know the Unicode of a flag?
+					{{ !isSmOrLower ? 'Search below!' : undefined }}
+				</h2>
+				<h2 v-if="isSmOrLower" class="font-bold" style="margin: 0">
+					Search below!
+				</h2>
+			</div>
+			<div
+				class="flex flex-column sm:flex-row align-items-center justify-content-center gap-5 w-full"
+			>
 				<FloatLabel style="width: fit-content">
 					<InputText id="search" type="text" v-model="search" />
 					<label for="search">Search</label>
@@ -246,10 +290,14 @@ const slicedUnicodes = computed(() => {
 			<template v-else>
 				<DataTable
 					:value="slicedUnicodes"
-					tableStyle="min-width: 50rem"
+					:tableStyle="`min-width: ${tableMinWidth}rem`"
 				>
 					<Column field="name" header="Name" />
-					<Column field="short_name" header="Short Name" />
+					<Column
+						v-if="!isSmOrLower"
+						field="short_name"
+						header="Short Name"
+					/>
 					<Column field="icon" header="Icon">
 						<template #body="props">
 							<Image
@@ -289,7 +337,11 @@ const slicedUnicodes = computed(() => {
 							</div>
 						</template>
 					</Column>
-					<Column field="subcategory" header="Category">
+					<Column
+						v-if="!isSmOrLower"
+						field="subcategory"
+						header="Category"
+					>
 						<template #body="props">
 							<div
 								v-tooltip.bottom="'Click to copy'"
